@@ -7,6 +7,8 @@ import com.gstory.flutter_tencentad.rewardvideoad.RewardVideoAd
 import com.qq.e.ads.interstitial2.UnifiedInterstitialAD
 import com.qq.e.ads.interstitial2.UnifiedInterstitialADListener
 import com.gstory.flutter_unionad.FlutterTencentAdEventPlugin
+import com.qq.e.ads.AbstractAD
+import com.qq.e.ads.cfg.VideoOption
 import com.qq.e.ads.rewardvideo.RewardVideoAD
 import com.qq.e.comm.util.AdError
 
@@ -24,6 +26,15 @@ object InterstitialAd {
         this.codeId = params["androidId"] as String
         this.isFullScreen = params["isFullScreen"] as Boolean
         loadInterstitialAD()
+
+    }
+
+    private fun setVideoOption(){
+        var builder = VideoOption.Builder()
+        builder.setAutoPlayMuted(true)
+        builder.setDetailPageMuted(true)
+        var option = builder.build()
+        unifiedInterstitialAD?.setVideoOption(option)
     }
 
     private fun loadInterstitialAD() {
@@ -32,6 +43,8 @@ object InterstitialAd {
             codeId,
             interstitialADListener
         )
+        setVideoOption()
+//        unifiedInterstitialAD?.setDownloadConfirmListener(context, i, SCENES_AD_OR_NATIVE_LANDING_PAGE, downloadConfirmCallBack -> )
 //        unifiedInterstitialAD?.setMediaListener(this)
         if(isFullScreen!!){
             unifiedInterstitialAD?.loadFullScreenAD()
@@ -60,7 +73,7 @@ object InterstitialAd {
         if(isFullScreen!!){
             unifiedInterstitialAD?.showFullScreenAD(context)
         }else{
-            unifiedInterstitialAD?.showAsPopupWindow()
+            unifiedInterstitialAD?.show()
         }
     }
 
@@ -137,3 +150,4 @@ object InterstitialAd {
     }
 
 }
+

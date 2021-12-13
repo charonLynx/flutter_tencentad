@@ -40,7 +40,7 @@
     _isFullScreen = [dic[@"isFullScreen"] boolValue];
     _interstitialAd = [[GDTUnifiedInterstitialAd alloc] initWithPlacementId:_codeId];
     _interstitialAd.delegate = self;
-    _interstitialAd.videoMuted = false;
+    _interstitialAd.videoMuted = YES;
     _isFullScreen ?  [_interstitialAd loadFullScreenAd] : [_interstitialAd loadAd];
 }
 

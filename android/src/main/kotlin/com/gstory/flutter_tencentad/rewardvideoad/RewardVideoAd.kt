@@ -5,6 +5,7 @@ import android.content.ServiceConnection
 import com.gstory.flutter_tencentad.LogUtil
 import com.gstory.flutter_tencentad.interstitialad.InterstitialAd
 import com.gstory.flutter_unionad.FlutterTencentAdEventPlugin
+import com.qq.e.ads.cfg.VideoOption
 import com.qq.e.ads.rewardvideo.RewardVideoAD
 import com.qq.e.ads.rewardvideo.RewardVideoADListener
 import com.qq.e.ads.rewardvideo.ServerSideVerificationOptions
@@ -34,9 +35,10 @@ object RewardVideoAd {
     }
 
     private fun loadRewardVideoAd() {
-        rewardVideoAD = RewardVideoAD(context, codeId, rewardVideoADListener) // 有声播放
+        rewardVideoAD = RewardVideoAD(context, codeId, rewardVideoADListener,false) // 有声播放
         rewardVideoAD?.setServerSideVerificationOptions(ServerSideVerificationOptions.Builder().setUserId(this.userID).setCustomData(customData).build())
         rewardVideoAD?.loadAD()
+//        rewardVideoAD?.setDownloadConfirmListener { context, i, SCENES_AD_OR_NATIVE_LANDING_PAGE, downloadConfirmCallBack ->  }
     }
 
     fun showAd() {
